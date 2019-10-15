@@ -30,6 +30,8 @@ Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->na
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 
+// 注册成功后提示消息页面
+Route::get('ok','Auth\VerificationController@ok')->name('ok');
 
 
 
