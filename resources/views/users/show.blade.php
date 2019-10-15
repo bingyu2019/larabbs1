@@ -13,7 +13,6 @@
           <h5><strong>个人简介</strong></h5>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
           <hr>
-           <h5><strong>jili20.com第 1 号用户</strong></h5>
           <h5><strong>注册于</strong></h5>
           <p>January 01 1901</p>
         </div>
@@ -22,7 +21,8 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
       <div class="card ">
         <div class="card-body">
-          <h1 class="mb-0" style="font-size:22px;">{{ $user->name }} <small>{{ $user->email }}</small></h1>
+          <h1 class="mb-0 text-center" style="font-size:22px;">{{ $user->name }} </h1><small class="float-right">【 laraBBS 】第  54 号用户</small>
+
         </div>
       </div>
       <hr>

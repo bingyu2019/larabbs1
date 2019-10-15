@@ -31,7 +31,7 @@ Route::post('email/resend', 'Auth\VerificationController@resend')->name('verific
 
 
 // 注册成功后提示消息页面
-Route::get('ok','Auth\VerificationController@ok')->name('ok');
+Route::get('users/show','Auth\VerificationController@show')->name('users.show');
 
 // 个人页面
 Route::resource('users', 'UsersController',['only'=>['show','update','edit']]);

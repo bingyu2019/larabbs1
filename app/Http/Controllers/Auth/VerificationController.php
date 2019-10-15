@@ -26,7 +26,7 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'ok';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -40,8 +40,5 @@ class VerificationController extends Controller
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
-    public function ok(User $user)
-    {
-        return view('shared.ok',compact('user'));
-    }
+
 }
