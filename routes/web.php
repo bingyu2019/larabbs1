@@ -36,6 +36,37 @@ Route::get('users/show','Auth\VerificationController@show')->name('users.show');
 // 个人页面
 Route::resource('users', 'UsersController',['only'=>['show','update','edit']]);
 
+// 分类列表话题
+Route::resource('categories', 'CategoriesController',['only'=> ['show']]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
