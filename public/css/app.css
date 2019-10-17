@@ -17104,3 +17104,10 @@ body {
   line-height: 38px;
 }
 
+/*分页。 让弹性盒元素在必要的时候拆行*/
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+}
+

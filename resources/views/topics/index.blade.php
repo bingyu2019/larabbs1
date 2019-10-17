@@ -35,9 +35,18 @@
           {{-- 话题列表 --}}
           @include('topics._topic_list', ['topics' => $topics])
           {{-- 分页 --}}
-          <div class="mt-5 pagination pagination-mini pr-5">
+          <div class="mt-5 pagination pagination-mini text-center">
             {!! $topics->appends(Request::except('page'))->render() !!}
           </div>
+
+
+          <a class="float-left pager previous" href="{!! $topics->previousPageUrl() !!}">上一页</a>
+
+          <a class="float-right pager next" href="{!! $topics->nextPageUrl() !!}">下一页</a>
+
+
+
+
         </div>
       </div>
     </div>

@@ -42,6 +42,10 @@ Route::resource('categories', 'CategoriesController',['only'=> ['show']]);
 // 编辑器上传图片路由
 Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
 
+// 帖子路由
+Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
+// 显示百度翻译路由
+Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
 
 
 
@@ -60,15 +64,3 @@ Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);

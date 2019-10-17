@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicRequest;
 use Auth;
+use DB;
 
 class TopicsController extends Controller
 {
@@ -20,12 +21,24 @@ class TopicsController extends Controller
 	public function index(Request $request, Topic $topic)
 	{
 //		$topics = Topic::with('user','category')->paginate(30);
+
+//        $topic = DB::table('topics')->simplePaginate(15);
 		$topics = $topic->withOrder($request->order)->paginate(20);
-		return view('topics.index', compact('topics'));
+		return view('topics.index', compact('topics','$topic'));
 	}
 
-    public function show(Topic $topic)
+ /*   public function show(Topic $topic)
     {
+        return view('topics.show', compact('topic'));
+    }*/
+
+    public function show(Request $request, Topic $topic)
+    {
+        // URL 矫正
+        if ( ! empty($topic->slug) && $topic->slug != $request->slug) {
+            return redirect($topic->link(), 301);
+        }
+
         return view('topics.show', compact('topic'));
     }
 
@@ -56,7 +69,8 @@ class TopicsController extends Controller
             }
         }
         $topic->save();
-        return redirect()->route('topics.show', $topic->id)->with('success', '帖子创建成功！');
+//        return redirect()->route('topics.show', $topic->id)->with('success', '帖子创建成功！');
+        return redirect()->to($topic->link())->with('success', '帖子创建成功！');
     }
 
 
@@ -73,7 +87,8 @@ class TopicsController extends Controller
 		$this->authorize('update', $topic);
 		$topic->update($request->all());
 
-		return redirect()->route('topics.show', $topic->id)->with('message', '更新成功！');
+//		return redirect()->route('topics.show', $topic->id)->with('message', '更新成功！');
+		return redirect()->to($topic->link())->with('message', '更新成功！');
 	}
 
 /*    public function update(TopicRequest $request,ImageUploadHandler $uploader, Topic $topic)
