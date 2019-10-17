@@ -3,13 +3,14 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTopicsTable extends Migration 
+class CreateTopicsTable extends Migration
 {
 	public function up()
 	{
 		Schema::create('topics', function(Blueprint $table) {
             $table->increments('id');
             $table->string('title')->index();
+            $table->string('photo')->nullable();
             $table->text('body');
             $table->bigInteger('user_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();

@@ -22,7 +22,7 @@
             <form action="{{ route('topics.update', $topic->id) }}" method="POST" accept-charset="UTF-8">
               <input type="hidden" name="_method" value="PUT">
               @else
-                <form action="{{ route('topics.store') }}" method="POST" accept-charset="UTF-8">
+                <form action="{{ route('topics.store') }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                   @endif
 
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -41,6 +41,18 @@
                       @endforeach
                     </select>
                   </div>
+
+                  {{-- 帖子缩略图 --}}
+                  <div class="form-group mb-4">
+                    <label for="" class="photo-label">帖子封面缩略图</label>
+                    <input type="file" name="photo" class="form-control-file">
+
+                    @if($topic->photo)
+                      <br>
+                      <img class="thumbnail img-responsive" src="{{ $topic->photo }}" width="200" />
+                    @endif
+                  </div>
+
 
                   <div class="form-group">
                     <textarea name="body" class="form-control" id="editor" rows="6" placeholder="请填入至少三个字符的内容。" required>{{ old('body', $topic->body ) }}</textarea>

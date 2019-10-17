@@ -14,7 +14,8 @@
 
         <div class="card-body">
 
-          <form action="{{ route('users.update', $user->id) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+          <form action="{{ route('users.update', $user->id) }}" method="POST" accept-charset="UTF-8"
+                enctype="multipart/form-data">
             <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -22,16 +23,19 @@
 
             <div class="form-group">
               <label for="name-field">用户名</label>
-              <input class="form-control" type="text" name="name" id="name-field" value="{{ old('name', $user->name) }}" />
+              <input class="form-control" type="text" name="name" id="name-field"
+                     value="{{ old('name', $user->name) }}"/>
             </div>
             <div class="form-group">
               <label for="email-field">邮 箱</label>
-              <input class="form-control" type="text" name="email" id="email-field" value="{{ old('email', $user->email) }}"/>
+              <input class="form-control" type="text" name="email" id="email-field"
+                     value="{{ old('email', $user->email) }}"/>
             </div>
 
             <div class="form-group">
               <label for="introduction-field">个人简介</label>
-              <textarea name="introduction" id="introduction-field" class="form-control" rows="3">{{ old('introduction', $user->introduction) }}</textarea>
+              <textarea name="introduction" id="introduction-field" class="form-control"
+                        rows="3">{{ old('introduction', $user->introduction) }}</textarea>
             </div>
 
             <div class="form-group mb-4">
@@ -55,19 +59,20 @@
 
 @endsection
 
-
-<script type="text/javascript">
-    function showPreview(source) {
-        var file = source.files[0];
-        if(window.FileReader) {
-            var fr = new FileReader();
-            console.log(fr);
-            var portrait = document.getElementById('portrait');
-            fr.onloadend = function(e) {
-                portrait.src = e.target.result;
-            };
-            fr.readAsDataURL(file);
-            portrait.style.display = 'block';
-        }
-    }
-</script>
+@section('scripts')
+  <script type="text/javascript">
+      function showPreview(source) {
+          var file = source.files[0];
+          if (window.FileReader) {
+              var fr = new FileReader();
+              console.log(fr);
+              var portrait = document.getElementById('portrait');
+              fr.onloadend = function (e) {
+                  portrait.src = e.target.result;
+              };
+              fr.readAsDataURL(file);
+              portrait.style.display = 'block';
+          }
+      }
+  </script>
+@stop
