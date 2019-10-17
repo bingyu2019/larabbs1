@@ -21,8 +21,7 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
       <div class="card ">
         <div class="card-body">
-          <h1 class="mb-0 text-center" style="font-size:22px;">{{ $user->name }} </h1><small class="float-right">【 laraBBS 】第  54 号用户</small>
-
+          <h1 class="mb-0 text-center" style="font-size:22px;">{{ $user->name }} </h1><small class="float-right">【 laraBBS 】第 {{ $user->id }} 号用户</small>
         </div>
       </div>
       <hr>

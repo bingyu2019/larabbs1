@@ -19,6 +19,11 @@
             </a>
           </div>
 
+          {{-- 手机屏幕才显示帖子缩略图 --}}
+          @if (!empty($topic->photo))
+          <img class="card-img-top d-block d-sm-none" src="{{ $topic->photo }}" alt="{{ $topic->name }}" height="150">
+          @endif
+
           <small class="media-body meta text-secondary">
 
             <a class="text-secondary" href="{{ route('categories.show', $topic->category_id) }}" title="{{ $topic->category->name }}">

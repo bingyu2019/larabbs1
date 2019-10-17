@@ -35,7 +35,7 @@
           {{-- 话题列表 --}}
           @include('topics._topic_list', ['topics' => $topics])
           {{-- 分页 --}}
-          <div class="mt-5">
+          <div class="mt-5 pagination pagination-mini pr-5">
             {!! $topics->appends(Request::except('page'))->render() !!}
           </div>
         </div>

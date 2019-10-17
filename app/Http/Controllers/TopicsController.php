@@ -35,39 +35,37 @@ class TopicsController extends Controller
 		return view('topics.create_and_edit', compact('topic','categories'));
 	}
 
-/*	public function store(TopicRequest $request,Topic $topic)
-	{
-		//$topic = Topic::create($request->all());
-		$topic->fill($request->all());
-		$topic->user_id = Auth::id();
-		$topic->save();
-		return redirect()->route('topics.show', $topic->id)->with('success', '帖子创建成功！');
-	}*/
-
-
-
-    public function store(UserRequest $request, ImageUploadHandler $uploader, Topic $topic)
+/*    public function store(TopicRequest $request, Topic $topic)
     {
-        $data = $request->all();
+        $topic->fill($request->all());
+        $topic->user_id = Auth::id();
+        $topic->save();
+
+        return redirect()->route('topics.show', $topic->id)->with('success', '帖子创建成功！');
+    }*/
+
+    public function store(TopicRequest $request, ImageUploadHandler $uploader, Topic $topic)
+    {
+        $topic->fill($request->all());
+        $topic->user_id = Auth::id();
 
         if ($request->photo) {
             $result = $uploader->save($request->photo, 'photos', $topic->id);
             if ($result) {
-                $data['photo'] = $result['path'];
+                $topic['photo'] = $result['path'];
             }
         }
-
-        $topic->save($data);
-        return redirect()->route('topic.show', $topic->id)->with('success', '个人资料更新成功！');
+        $topic->save();
+        return redirect()->route('topics.show', $topic->id)->with('success', '帖子创建成功！');
     }
 
 
-
-	public function edit(Topic $topic)
-	{
+    public function edit(Topic $topic)
+    {
         $this->authorize('update', $topic);
-		return view('topics.create_and_edit', compact('topic'));
-	}
+        $categories = Category::all();
+        return view('topics.create_and_edit', compact('topic', 'categories'));
+    }
 
 
 	public function update(TopicRequest $request, Topic $topic)
@@ -75,7 +73,7 @@ class TopicsController extends Controller
 		$this->authorize('update', $topic);
 		$topic->update($request->all());
 
-		return redirect()->route('topics.show', $topic->id)->with('message', 'Updated successfully.');
+		return redirect()->route('topics.show', $topic->id)->with('message', '更新成功！');
 	}
 
 /*    public function update(TopicRequest $request,ImageUploadHandler $uploader, Topic $topic)

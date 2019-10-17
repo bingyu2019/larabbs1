@@ -44,7 +44,7 @@
 
               @if($user->avatar)
                 <br>
-                <img src="{{ $user->avatar }}" id="portrait" class="thumbnail img-responsive" width="200" style="display:none;">
+                <img src="{{ $user->avatar }}" id="portrait" class="thumbnail img-responsive" width="200" style="display:block;">
               @endif
             </div>
 

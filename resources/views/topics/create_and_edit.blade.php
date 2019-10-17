@@ -19,10 +19,12 @@
           <hr>
 
           @if($topic->id)
-            <form action="{{ route('topics.update', $topic->id) }}" method="POST" accept-charset="UTF-8">
+            <form action="{{ route('topics.update', $topic->id) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+
               <input type="hidden" name="_method" value="PUT">
               @else
-                <form action="{{ route('topics.store') }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                <form action="{{ route('topics.store') }}" method="POST" accept-charset="UTF-8"
+                      enctype="multipart/form-data">
                   @endif
 
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -30,36 +32,39 @@
                   @include('shared._error')
 
                   <div class="form-group">
-                    <input class="form-control" type="text" name="title" value="{{ old('title', $topic->title ) }}" placeholder="请填写标题" required />
+                    <input class="form-control" type="text" name="title" value="{{ old('title', $topic->title ) }}"
+                           placeholder="请填写标题" required/>
                   </div>
 
                   <div class="form-group">
                     <select class="form-control" name="category_id" required>
-                      <option value="" hidden disabled selected>请选择分类</option>
+                      <option value="" hidden disabled {{ $topic->id ? '' : 'selected' }}>请选择分类</option>
                       @foreach ($categories as $value)
-                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                        <option value="{{ $value->id }}" {{ $topic->category_id == $value->id ? 'selected' : '' }}>
+                          {{ $value->name }}
+                        </option>
                       @endforeach
                     </select>
                   </div>
 
                   {{-- 帖子缩略图 --}}
                   <div class="form-group mb-4">
-                    <label for="" class="photo-label">帖子封面缩略图</label>
-                    <input type="file" name="photo" class="form-control-file">
-
+                    <label for="" class="photo-label">手机帖子封面</label>
+                    <input type="file" name="photo" class="form-control-file" onchange="showPreview(this)">
                     @if($topic->photo)
                       <br>
-                      <img class="thumbnail img-responsive" src="{{ $topic->photo }}" width="200" />
+                      <img src="{{ $topic->photo }}" id="portrait" class="thumbnail img-responsive" width="200" style="display:block;">
                     @endif
                   </div>
 
-
                   <div class="form-group">
-                    <textarea name="body" class="form-control" id="editor" rows="6" placeholder="请填入至少三个字符的内容。" required>{{ old('body', $topic->body ) }}</textarea>
+                    <textarea name="body" class="form-control" id="editor" rows="6" placeholder="请填入至少三个字符的内容。"
+                              required>{{ old('body', $topic->body ) }}</textarea>
                   </div>
 
                   <div class="well well-sm">
-                    <button type="submit" class="btn btn-primary"><i class="far fa-save mr-2" aria-hidden="true"></i> 保存</button>
+                    <button type="submit" class="btn btn-primary"><i class="far fa-save mr-2" aria-hidden="true"></i> 保存
+                    </button>
                   </div>
                 </form>
         </div>
@@ -81,7 +86,8 @@
   <script type="text/javascript" src="{{ asset('js/simditor.js') }}"></script>
 
   <script>
-      $(document).ready(function() {
+
+      $(document).ready(function () {
           var editor = new Simditor({
               textarea: $('#editor'),
 
@@ -100,9 +106,28 @@
           });
       });
 
-  </script>
 
+      /* 实时显示上传的缩略图无效 */
+/*      function showPreview(source) {
+          var file = source.files[0];
+          if (window.FileReader) {
+              var fr = new FileReader();
+              console.log(fr);
+              var portrait = document.getElementById('portrait');
+              fr.onloadend = function (e) {
+                  portrait.src = e.target.result;
+              };
+              fr.readAsDataURL(file);
+              portrait.style.display = 'block';
+          }
+      }*/
+
+
+
+
+  </script>
 @stop
+
 
 
 
