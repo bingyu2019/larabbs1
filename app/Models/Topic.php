@@ -60,6 +60,14 @@ class Topic extends Model
         // 一篇帖子下有多条回复
         return $this->hasMany(Reply::class);
     }
+
+
+    // 封装删除回复数量方法
+    public function updateReplyCount()
+    {
+        $this->reply_count = $this->replies->count();
+        $this->save();
+    }
 }
 
 

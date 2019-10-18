@@ -36,6 +36,7 @@ class TopicsController extends Controller
     {
         // URL 矫正
         if ( ! empty($topic->slug) && $topic->slug != $request->slug) {
+            session()->reflash();
             return redirect($topic->link(), 301);
         }
 
@@ -109,15 +110,17 @@ class TopicsController extends Controller
 	}*/
 
 
-	public function destroy(Topic $topic)
-	{
-		$this->authorize('destroy', $topic);
-		$topic->delete();
-//        return [];
-		return redirect()->route('topics.index')->with('message', '成功删除！');
-	}
+    public function destroy(Topic $topic)
+    {
+        $this->authorize('destroy', $topic);
+        $topic->delete();
+//        return redirect()->route('topics.index')->with('success', '成功删除！');
+        return [];
+
+    }
 
 
+    // 上传图片方法
     public function uploadImage(Request $request, ImageUploadHandler $uploader)
 {
     // 初始化返回数据，默认是失败的

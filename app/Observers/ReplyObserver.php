@@ -26,4 +26,11 @@ class ReplyObserver
         $reply->content = clean($reply->content, 'user_topic_body');
     }
 
+
+    // 删除回复减少回复数
+    public function deleted(Reply $reply)
+    {
+        $reply->topic->updateReplyCount();
+    }
+
 }

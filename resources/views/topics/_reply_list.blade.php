@@ -3,7 +3,8 @@
     <li class="bg-light rounded media" name="reply{{ $reply->id }}" id="reply{{ $reply->id }}">
       <div class="media-left">
         <a href="{{ route('users.show', [$reply->user_id]) }}">
-          <img src="{{ $reply->user->avatar }}" style="width: 48px;height: 48px;" alt="{{ $reply->user->name }}" class="media-object img-thumbnail mr-3">
+          <img src="{{ $reply->user->avatar }}" style="width: 48px;height: 48px;" alt="{{ $reply->user->name }}"
+               class="media-object img-thumbnail mr-3">
         </a>
       </div>
 
@@ -13,17 +14,25 @@
             {{ $reply->user->name }}
           </a>
           <span class="text-secondary"> • </span>
-          <span class="meta text-secondary" title="{{ $reply->created_at }}">{{ $reply->created_at->diffForHumans() }}</span>
+          <span class="meta text-secondary"
+                title="{{ $reply->created_at }}">{{ $reply->created_at->diffForHumans() }}</span>
 
           {{-- 回复删除按错--}}
-          <span class="meta float-right">
-            <a href="删除回复" class="mr-3">
-              <i class="far fa-trash-alt"></i>
-            </a>
-            <a href="编辑回复">
-              <i class="far fa-edit"></i>
-            </a>
+          @can('destroy', $reply)
+            <span class="meta float-right">
+            <form action="{{ route('replies.destroy', $reply->id) }}"
+                  onsubmit="return confirm('确定要删除此评论？');"
+                  method="post">
+              {{ csrf_field() }}
+              {{ method_field('DELETE') }}
+              <button type="submit" class="btn btn-default btn-xs pull-left text-secondary">
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </form>
           </span>
+          @endcan
+
+
         </div>
 
         <div class="reply-content text-secondary">
@@ -37,7 +46,7 @@
       <hr>
     @endif
 
-    @endforeach
+  @endforeach
 </ul>
 
 
