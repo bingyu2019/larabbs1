@@ -14,6 +14,8 @@
             <a href="{{ $topic->link() }}" title="{{ $topic->title }}">
               {{ $topic->title }}
             </a>
+            <br>
+
             <a class="float-right" href="{{ $topic->link() }}">
               <span class="badge badge-secondary badge-pill"> {{ $topic->reply_count }} </span>
             </a>
@@ -26,6 +28,8 @@
 
           <small class="media-body meta text-secondary">
 
+            <span> 贴号:{{ $topic->id }}</span>
+            <span> • </span>
             <a class="text-secondary" href="{{ route('categories.show', $topic->category_id) }}" title="{{ $topic->category->name }}">
               <i class="far fa-folder"></i>
               {{ $topic->category->name }}

@@ -47,6 +47,9 @@ Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'st
 // 显示百度翻译路由
 Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
 
+// 回复路由
+//Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+Route::resource('replies', 'RepliesController', ['only' => ['create', 'store', 'update', 'edit', 'destroy']]);
 
 
 
@@ -65,4 +68,6 @@ Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show
 
 
 
-Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+
+
+

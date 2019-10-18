@@ -11,19 +11,19 @@ class RepliesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth');
     }
 
-	public function index()
-	{
-		$replies = Reply::paginate();
-		return view('replies.index', compact('replies'));
-	}
+//	public function index()
+//	{
+//		$replies = Reply::paginate();
+//		return view('replies.index', compact('replies'));
+//	}
 
-    public function show(Reply $reply)
-    {
-        return view('replies.show', compact('reply'));
-    }
+//    public function show(Reply $reply)
+//    {
+//        return view('replies.show', compact('reply'));
+//    }
 
 	public function create(Reply $reply)
 	{

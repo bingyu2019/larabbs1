@@ -40,11 +40,13 @@
           </div>
 
 
-          <a class="float-left pager previous" href="{!! $topics->previousPageUrl() !!}">上一页</a>
+          <a class="float-left pager previous" href="{!! $topics->previousPageUrl() !!}">上一页</a>&nbsp;
+
+
+          &nbsp;&nbsp;<spen>当前第 {!! $topics->currentPage() !!} 页</spen>&nbsp;&nbsp;
+          <spen>共 {!! $topics->total() !!} 贴</spen>&nbsp;
 
           <a class="float-right pager next" href="{!! $topics->nextPageUrl() !!}">下一页</a>
-
-
 
 
         </div>
