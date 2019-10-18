@@ -113,7 +113,7 @@ class TopicsController extends Controller
 	{
 		$this->authorize('destroy', $topic);
 		$topic->delete();
-
+//        return [];
 		return redirect()->route('topics.index')->with('message', '成功删除！');
 	}
 

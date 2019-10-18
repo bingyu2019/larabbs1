@@ -9,13 +9,16 @@ use App\Models\Reply;
 
 class ReplyObserver
 {
-    public function creating(Reply $reply)
+    public function created(Reply $reply)
     {
-        //
+        $reply->topic->reply_count = $reply->topic->replies->count();
+        $reply->topic->save();
     }
 
-    public function updating(Reply $reply)
+    public function creating(Reply $reply)
     {
-        //
+        // 净化回复 content 字段，处理 XSS 安全问题
+        $reply->content = clean($reply->content, 'user_topic_body');
     }
+
 }
