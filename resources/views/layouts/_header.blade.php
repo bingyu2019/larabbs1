@@ -32,8 +32,16 @@
             </a>
           </li>
 
+        {{-- 消息通知 --}}
+        <li class="nav-item notification-badge">
+          <a href="{{ route('notifications.index') }}" class="nav-link mr-3 badge badge-pill badge-{{ Auth::user()->notification_count > 0 ? 'hint' : 'secondary' }} text-white">
+            {{ Auth::user()->notification_count }}
+          </a>
+        </li>
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{-- 头像 --}}
 {{--              <img src="{{ Auth::user()->avatar }}" class="img-responsive img-circle" width="30px" height="30px">--}}
               <img src="{{ Auth::user()->avatar }}" class="img-responsive img-circle" width="30px" height="30px " style="border-radius: 50%;background-color: transparent;box-shadow:0px 0px 8px 5px #ccc; " ; >
               {{ Auth::user()->name }}

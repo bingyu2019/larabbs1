@@ -51,6 +51,8 @@ Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show
 //Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
 Route::resource('replies', 'RepliesController', ['only' => ['create', 'store', 'update', 'edit', 'destroy']]);
 
+// 通知列表路由
+Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
 
 
 
