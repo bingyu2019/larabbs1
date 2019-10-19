@@ -12,6 +12,7 @@ use function GuzzleHttp\Psr7\str;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
+    use Traits\ActiveUserHelper;
     use HasRoles;
     use MustVerifyEmailTrait;
 
